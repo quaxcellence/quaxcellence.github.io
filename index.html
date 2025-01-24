@@ -6,31 +6,23 @@
     <title>Quaxcellence</title>
     <style>
         body, html {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: radial-gradient(circle, #000428, #004e92);
-      color: white;
-      font-family: 'Arial', sans-serif;
-    }
-    canvas {
-      display: block;
-    }
-    
-    h1 {
-      font-size: 3rem;
-      text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
-    }
-    p {
-      font-size: 1.2rem;
-      text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
-    }
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: radial-gradient(circle, #000428, #004e92);
+            color: cyan;
+            font-family: 'Arial', sans-serif;
+        }
+        canvas {
+            display: block;
+        }
         .header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
         .header h1 {
             font-size: 3em;
@@ -40,10 +32,14 @@
             margin: 0;
         }
         .section {
-            padding: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
             justify-content: space-around;
+            z-index: 1;
         }
         .card {
             background: rgba(255, 255, 255, 0.15);
@@ -67,14 +63,18 @@
         }
         .card p {
             font-size: 1em;
-            color: #e0e0e0;
+            color: cyan;
         }
         .footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.8);
-            color: #aaa;
+            color: cyan;
             text-align: center;
             padding: 10px 20px;
-            margin-top: 50px;
+            z-index: 1;
         }
         .footer a {
             color: #3b82f6;
@@ -82,55 +82,54 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  <script>
-    let angle = 0;
-    let branchLength = 150;
-    let mouseInfluence = 0;
+    <script>
+        let angle = 0;
+        let branchLength = 150;
+        let mouseInfluence = 0;
 
-    function setup() {
-      createCanvas(windowWidth, windowHeight);
-      stroke(0, 255, 255, 150);
-      strokeWeight(2);
-      noFill();
-    }
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            stroke(0, 255, 255, 150);
+            strokeWeight(2);
+            noFill();
+        }
 
-    function draw() {
-      background(0, 10); // Semi-transparent background for motion blur effect
-      translate(width / 2, height);
-      angle = map(mouseX, 0, width, -PI / 4, PI / 4); // Mouse controls branch angle
-      mouseInfluence = map(mouseY, 0, height, 0.5, 1.5); // Mouse controls branch length
-      drawBranch(branchLength * mouseInfluence);
-    }
+        function draw() {
+            background(0, 10); // Semi-transparent background for motion blur effect
+            translate(width / 2, height);
+            angle = map(mouseX, 0, width, -PI / 4, PI / 4); // Mouse controls branch angle
+            mouseInfluence = map(mouseY, 0, height, 0.5, 1.5); // Mouse controls branch length
+            drawBranch(branchLength * mouseInfluence);
+        }
 
-    function drawBranch(len) {
-      stroke(0, 255, 255, map(len, 10, 150, 50, 255)); // Glowing effect
-      line(0, 0, 0, -len);
-      translate(0, -len);
+        function drawBranch(len) {
+            stroke(0, 255, 255, map(len, 10, 150, 50, 255)); // Glowing effect
+            line(0, 0, 0, -len);
+            translate(0, -len);
 
-      if (len > 10) { // Recursive base case
-        push();
-        rotate(angle);
-        drawBranch(len * 0.67); // Right branch
-        pop();
-        push();
-        rotate(-angle);
-        drawBranch(len * 0.67); // Left branch
-        pop();
-      }
-    }
+            if (len > 10) { // Recursive base case
+                push();
+                rotate(angle);
+                drawBranch(len * 0.67); // Right branch
+                pop();
+                push();
+                rotate(-angle);
+                drawBranch(len * 0.67); // Left branch
+                pop();
+            }
+        }
 
-    function windowResized() {
-      resizeCanvas(windowWidth, windowHeight);
-    }
-  </script>
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
+    </script>
 </head>
 <body>
-    <!-- Canvas Container -->
-  <div id="canvas-container"></div>
     <div class="header">
         <h1>Welcome to Quaxcellence</h1>
         <p>Empowering the future with Generative AI, Web3, Quantum Computing, and Advanced Technologies</p>
     </div>
+
     <div class="section">
         <div class="card">
             <h2>Generative AI</h2>
@@ -145,6 +144,7 @@
             <p>Harnessing the quantum revolution to solve complex problems at scale.</p>
         </div>
     </div>
+
     <div class="footer">
         <p>&copy; 2025 Quaxcellence. All rights reserved. | <a href="#">Contact Us</a></p>
     </div>
