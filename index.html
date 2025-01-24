@@ -10,7 +10,7 @@
             padding: 0;
             overflow: hidden;
             background: radial-gradient(circle, #000428, #004e92);
-            color: cyan;
+            color: white;
             font-family: 'Arial', sans-serif;
         }
         canvas {
@@ -63,7 +63,34 @@
         }
         .card p {
             font-size: 1em;
-            color: cyan;
+            color: #e0e0e0;
+        }
+        .social-media {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1;
+        }
+        .social-media a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .social-media a:hover {
+            transform: scale(1.2);
+            background: linear-gradient(90deg, #3b82f6, #9333ea);
         }
         .footer {
             position: absolute;
@@ -71,7 +98,7 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.8);
-            color: cyan;
+            color: #aaa;
             text-align: center;
             padding: 10px 20px;
             z-index: 1;
@@ -143,6 +170,14 @@
             <h2>Quantum Computing</h2>
             <p>Harnessing the quantum revolution to solve complex problems at scale.</p>
         </div>
+    </div>
+
+    <div class="social-media">
+        <a href="https://quaxcellence.github.io/" target="_blank">🌐</a>
+        <a href="https://x.com/quaxcellence" target="_blank">X</a>
+        <a href="https://www.youtube.com/@quaxcellence" target="_blank">▶</a>
+        <a href="https://www.quaxcellence.com" target="_blank">🏠</a>
+        <a href="https://www.tiktok.com/@quaxcellence" target="_blank">🎵</a>
     </div>
 
     <div class="footer">
