@@ -1,2 +1,0 @@
-# quaxcellence.github.io
-Quaxcellence
