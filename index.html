@@ -5,13 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quaxcellence</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1c1c42, #532c8f, #0d3a6d);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+        body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: radial-gradient(circle, #000428, #004e92);
+      color: white;
+      font-family: 'Arial', sans-serif;
+    }
+    canvas {
+      display: block;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
+    }
+    p {
+      font-size: 1.2rem;
+      text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+    }
         .header {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -68,8 +81,52 @@
             text-decoration: none;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script>
+    let angle = 0;
+    let branchLength = 150;
+    let mouseInfluence = 0;
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      stroke(0, 255, 255, 150);
+      strokeWeight(2);
+      noFill();
+    }
+
+    function draw() {
+      background(0, 10); // Semi-transparent background for motion blur effect
+      translate(width / 2, height);
+      angle = map(mouseX, 0, width, -PI / 4, PI / 4); // Mouse controls branch angle
+      mouseInfluence = map(mouseY, 0, height, 0.5, 1.5); // Mouse controls branch length
+      drawBranch(branchLength * mouseInfluence);
+    }
+
+    function drawBranch(len) {
+      stroke(0, 255, 255, map(len, 10, 150, 50, 255)); // Glowing effect
+      line(0, 0, 0, -len);
+      translate(0, -len);
+
+      if (len > 10) { // Recursive base case
+        push();
+        rotate(angle);
+        drawBranch(len * 0.67); // Right branch
+        pop();
+        push();
+        rotate(-angle);
+        drawBranch(len * 0.67); // Left branch
+        pop();
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
 </head>
 <body>
+    <!-- Canvas Container -->
+  <div id="canvas-container"></div>
     <div class="header">
         <h1>Welcome to Quaxcellence</h1>
         <p>Empowering the future with Generative AI, Web3, Quantum Computing, and Advanced Technologies</p>
